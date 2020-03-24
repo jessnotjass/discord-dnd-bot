@@ -1,5 +1,6 @@
 const Discord = require('discord.js')
 const equipment = require('../commands/equipment')
+const dice = require('../commands/dice')
 
 const client = new Discord.Client()
 
@@ -10,7 +11,7 @@ client.on('ready', () => {
 
 client.on('message', message => {
   const prefix = message.content.substring(0, 1)
-  if (prefix === '$') {
+  if (prefix === '/') {
     const args = message.content.substring(1).toLowerCase().split(' ')
     const cmd = args[0]
     args.shift()
@@ -21,6 +22,10 @@ client.on('message', message => {
         break
       case ('ping'):
         message.reply(`Pong! \n HTTP Ping: ${new Date().getTime() - message.createdTimestamp} ms`)
+        break
+      case ('roll'):
+      case ('r'):
+        dice.roll(message, args)
         break
       default:
         message.reply('Invalid command.')

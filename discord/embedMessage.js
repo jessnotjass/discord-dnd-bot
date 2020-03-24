@@ -1,8 +1,8 @@
 const Discord = require('discord.js')
-
+const embedMessage = new Discord.MessageEmbed()
 // todo: refactor equipment category & add other categories
 exports.createEquipmentMessage = item => {
-  const embedMessage = new Discord.MessageEmbed()
+  embedMessage
     .setColor('#39FF14')
     .setTitle(item.name)
     .setDescription(item.desc ? item.desc : '')
