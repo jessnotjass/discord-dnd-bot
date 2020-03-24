@@ -4,7 +4,7 @@ const equipment = require('../commands/equipment')
 const client = new Discord.Client()
 
 client.on('ready', () => {
-  client.user.setActivity('Playing D&D 5e', { type: 'PLAYING' })
+  client.user.setActivity('D&D 5e', { type: 'PLAYING' })
   console.log(`Logged in as ${client.user.tag}!`)
 })
 
