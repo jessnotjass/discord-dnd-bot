@@ -53,7 +53,7 @@ exports.roll = (message, args) => {
     if (numberOfDice < DICE_LIMIT) {
       messageContent += `\n**Roll (${args[0]}):** ${results.values}`
     } else {
-      messageContent += messageContent += `\n**Roll (${args[0]}):** ${results.total}`
+      messageContent += `\n**Roll (${args[0]}):** ${results.total}`
     }
     messageContent += `\n**Total:** ${results.total}`
   }
