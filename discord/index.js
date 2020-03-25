@@ -3,6 +3,7 @@ const equipment = require('../commands/equipment')
 const dice = require('../commands/dice')
 
 const client = new Discord.Client()
+const prefix = '/'
 
 client.on('ready', () => {
   client.user.setActivity('D&D 5e', { type: 'PLAYING' })
@@ -10,8 +11,7 @@ client.on('ready', () => {
 })
 
 client.on('message', message => {
-  const prefix = message.content.substring(0, 1)
-  if (prefix === '/') {
+  if (message.content.startsWith(prefix)) {
     const args = message.content.substring(1).toLowerCase().split(' ')
     const cmd = args[0]
     args.shift()

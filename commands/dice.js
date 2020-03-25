@@ -1,3 +1,5 @@
+const DICE_LIMIT = 10
+
 const getRollResult = (numberOfDice, sides) => {
   const values = []
   let total = 0
@@ -23,30 +25,37 @@ exports.roll = (message, args) => {
   let [numberOfDice, sides] = dice
   let messageContent = `${message.author} :game_die:`
 
-  if (numberOfDice === '') {
-    numberOfDice = 1
-  }
-
+  if (numberOfDice === '') (numberOfDice = 1)
   if (type) {
     const { roll1, roll2 } = getModifiedRollResult(numberOfDice, sides)
     if (type === 'adv') {
-      messageContent += `
-        **Roll (${args[0]}) with Advantage:** ~~(${roll1.advantage ? roll2.values : roll1.values})~~ (${roll1.advantage ? roll1.values : roll2.values})
-        **Total:** ${roll1.advantage ? roll1.total : roll2.total}
-      `
+      if (numberOfDice < DICE_LIMIT) {
+        messageContent += `\n**Roll (${args[0]}) with Advantage:**` +
+          `~~(${roll1.advantage ? roll2.values : roll1.values})~~` +
+          `(${roll1.advantage ? roll1.values : roll2.values})`
+      } else {
+        messageContent += `\n**Roll (${args[0]}) with Advantage:** ${roll1.advantage ? roll1.total : roll2.total}`
+      }
+      messageContent += `\n**Total:** ${roll1.advantage ? roll1.total : roll2.total}`
     }
     if (type === 'dis') {
-      messageContent += `
-        **Roll (${args[0]}) with Disadvantage:** ~~(${roll1.advantage ? roll1.values : roll2.values})~~ (${roll1.advantage ? roll2.values : roll1.values})
-        **Total:** ${roll1.advantage ? roll2.total : roll1.total}
-      `
+      if (numberOfDice < DICE_LIMIT) {
+        messageContent += `\n**Roll (${args[0]}) with Disadvantage:**` +
+          `~~(${roll1.advantage ? roll1.values : roll2.values})~~` +
+          `(${roll1.advantage ? roll2.values : roll1.values})`
+      } else {
+        messageContent += `\n**Roll (${args[0]}) with Disadvantage:** ${roll1.advantage ? roll2.total : roll1.total}`
+      }
+      messageContent += `\n**Total:** ${roll1.advantage ? roll2.total : roll1.total}`
     }
   } else {
     const results = getRollResult(numberOfDice, sides)
-    messageContent += `
-      **Roll (${args[0]}):** ${results.values}
-      **Total:** ${results.total}
-    `
+    if (numberOfDice < DICE_LIMIT) {
+      messageContent += `\n**Roll (${args[0]}):** ${results.values}`
+    } else {
+      messageContent += messageContent += `\n**Roll (${args[0]}):** ${results.total}`
+    }
+    messageContent += `\n**Total:** ${results.total}`
   }
   message.channel.send(messageContent)
 }
