@@ -25,6 +25,7 @@ client.on('message', message => {
         break
       case ('roll'):
       case ('r'):
+        message.delete().catch()
         dice.roll(message, args)
         break
       default:
