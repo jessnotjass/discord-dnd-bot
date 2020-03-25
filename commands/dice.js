@@ -29,7 +29,7 @@ exports.roll = (message, args) => {
   if (type) {
     const { roll1, roll2 } = getModifiedRollResult(numberOfDice, sides)
     if (type === 'adv') {
-      if (numberOfDice < DICE_LIMIT) {
+      if (numberOfDice <= DICE_LIMIT) {
         messageContent += `\n**Roll (${args[0]}) with Advantage:**` +
           `~~(${roll1.advantage ? roll2.values : roll1.values})~~` +
           `(${roll1.advantage ? roll1.values : roll2.values})`
@@ -39,7 +39,7 @@ exports.roll = (message, args) => {
       messageContent += `\n**Total:** ${roll1.advantage ? roll1.total : roll2.total}`
     }
     if (type === 'dis') {
-      if (numberOfDice < DICE_LIMIT) {
+      if (numberOfDice <= DICE_LIMIT) {
         messageContent += `\n**Roll (${args[0]}) with Disadvantage:**` +
           `~~(${roll1.advantage ? roll1.values : roll2.values})~~` +
           `(${roll1.advantage ? roll2.values : roll1.values})`
@@ -50,7 +50,7 @@ exports.roll = (message, args) => {
     }
   } else {
     const results = getRollResult(numberOfDice, sides)
-    if (numberOfDice < DICE_LIMIT) {
+    if (numberOfDice <= DICE_LIMIT) {
       messageContent += `\n**Roll (${args[0]}):** ${results.values}`
     } else {
       messageContent += `\n**Roll (${args[0]}):** ${results.total}`
