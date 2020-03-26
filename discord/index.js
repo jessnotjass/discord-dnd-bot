@@ -9,7 +9,7 @@ client.on('ready', () => {
   client.user.setActivity('D&D 5e', { type: 'PLAYING' })
   console.log(`Logged in as ${client.user.tag}!`)
 })
-
+// todo: add command permission checks
 client.on('message', message => {
   if (message.content.startsWith(prefix)) {
     const args = message.content.substring(1).toLowerCase().split(' ')
