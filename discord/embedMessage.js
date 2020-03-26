@@ -62,3 +62,26 @@ exports.createEquipmentMessage = item => {
   }
   return embedMessage
 }
+
+exports.createHelpMessage = () => {
+  const embedMessage = new Discord.MessageEmbed()
+  embedMessage
+    .setColor('#000000')
+    .setDescription('A list of commands for this Discord DnD Utility Bot.')
+    .addFields(
+      {
+        name: 'Dice Roll',
+        value:
+          '**roll** | **r** - Roll dice in xdy format\n' +
+          '**roll adv** | **r adv** - Roll dice in xdy format with advantage\n' +
+          '**roll dis** | **r dis** - Roll dice in xdy format with disadvantage',
+        inline: false
+      },
+      {
+        name: 'Search',
+        value:
+          '**equipment <item>** | **e <item>** - Search a specific equipment item'
+      }
+    )
+  return embedMessage
+}
